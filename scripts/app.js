@@ -1,6 +1,7 @@
 var map, dialog;
       require([
-        "esri/map", "esri/dijit/BasemapToggle", "esri/dijit/Search", "esri/geometry/Extent", "esri/layers/FeatureLayer",
+        "esri/map", "esri/dijit/HomeButton", "esri/dijit/LocateButton", "esri/dijit/BasemapToggle",
+         "esri/dijit/Search", "esri/geometry/Extent", "esri/layers/FeatureLayer",
         "esri/layers/RasterLayer", "esri/layers/ImageServiceParameters", "esri/layers/MosaicRule",
         "esri/layers/DimensionalDefinition",
         "dijit/form/VerticalSlider","dijit/form/VerticalRule",
@@ -16,7 +17,7 @@ var map, dialog;
         "dojox/charting/themes/Desert", "dojo/domReady!"
 
       ], function(
-        Map, BasemapToggle, Search, Extent, FeatureLayer,
+        Map, HomeButton, LocateButton, BasemapToggle, Search, Extent, FeatureLayer,
         RasterLayer, ImageServiceParameters, MosaicRule,
         DimensionalDefinition,
         VerticalSlider, VerticalRule,
@@ -34,6 +35,17 @@ var map, dialog;
           center: [-80.94, 33.646],
           zoom: 8
         });
+
+        var home = new HomeButton({
+          theme: "HomeButton",
+          map: map
+        }, "homeButtonDiv");
+        home.startup();
+
+        var geolocate = new LocateButton({
+          map: map
+        }, "locateButtonDiv");
+        geolocate.startup();
 
         var rulesNode = document.getElementById("rulesNode");
 
