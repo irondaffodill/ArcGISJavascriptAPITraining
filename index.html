@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    
+    <title>ArcGIS JavaScript API Exercise</title>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/3.26/dijit/themes/tundra/tundra.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.26/esri/css/esri.css">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    
+    <link rel="manifest" href="/manifest.json">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
+    <script src="https://js.arcgis.com/3.26/"></script>
+    <script src="scripts/app.js"></script>
+
+  </head>
+
+  <body class="tundra">
+    <div id="mapDiv" >
+      <div id="search"></div>
+      <div id="BasemapToggle"></div>
+      <canvas id="chartCanvas"></canvas>
+      <div id ="queryInputs">
+          <div id="queryTitle">Filter results by</div>
+    
+           <div><input class="queryTextInput" id="maleCount" type="text" name="malePopulation" placeholder="Male Population greater than"></div>          
+            <div><input class="queryTextInput" id="femaleCount" type="text" name="femalePopulation" placeholder="Femal Population greater than >"></div>
+          
+          <div id="querybuttonDiv"><button id = "queryMaleFemaleBtn" type="text">Filter</button></div>
+      </div>
+    </div>
+  </body>
+</html>
+
+

@@ -1,0 +1,107 @@
+html, body, #mapDiv {
+  padding:0;
+  margin:0;
+  height:100%;
+}
+#mapDiv {
+  position: relative;
+}
+
+#info {
+  background: #fff;
+  box-shadow: 0 0 5px #888;
+  left: 1em;
+  padding: 0.5em;
+  position: absolute;
+  top: 1em;
+  z-index: 40;
+}
+
+#button {
+  background: #fff;
+  box-shadow: 0 0 5px #888;
+  left: 1em;
+  padding: 0.5em;
+  position: absolute;
+  top: 7em;
+  z-index: 40;
+}
+
+#queryInputs {
+  background: #fff;
+  box-shadow: 0 0 5px #888;
+  left: 1em;
+  padding: 0.5em;
+  position: absolute;
+  bottom: 1em;
+  z-index: 40;
+}
+
+#search {
+  display: block;
+  position: absolute;
+  z-index: 3;
+  top: 20px;
+  left: 1em;
+}
+
+#BasemapToggle {
+position: absolute;
+top: 4em;
+right: 10px;
+z-index: 50;
+}
+
+#chartCanvas {
+  background: #fff;
+  box-shadow: 0 0 5px #888;
+  padding: 0.5em;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  right: 1em;
+  bottom: 1em;
+  z-index: 80;
+  overflow: hidden;
+}
+
+.queryTextInput {
+  margin: 4px;
+}
+
+#queryTitle {
+  margin-bottom: 4px;
+}
+
+.esriSimpleSlider {
+top: 4em;
+left: 1em;
+}
+
+#queryMaleFemaleBtn {
+  background-color: #e7e7e7;
+  font-size: 12px;
+  padding: 6px;
+  text-align: center;
+  border-radius: 8px;
+  margin-left: 10px;
+}
+
+
+#querybuttonDiv{
+  margin: auto;
+    width: 50%;
+}
+
+/*#verticalDiv{
+  background: #fff;
+  box-shadow: 0 0 5px #888;
+  padding: 0.5em;
+  width: 20px;
+  height: 10px;
+  position: absolute;
+  right: 10px;
+  top: 10em;
+  z-index: 80;
+  overflow: hidden;
+}*/
