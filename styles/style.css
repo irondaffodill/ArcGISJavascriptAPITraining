@@ -3,8 +3,25 @@ html, body, #mapDiv {
   margin:0;
   height:100%;
 }
+
+#navbarDiv {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 5%;
+  text-align: center;
+  font-size: 24px;
+  padding: 5px;
+  background-color: #3E4EB8;
+  color: #ffffff;
+}
+
+}
 #mapDiv {
   position: relative;
+  padding: 0;
+  margin: 0;
+  height: 95%;
 }
 
 #info {
