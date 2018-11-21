@@ -1,7 +1,7 @@
 var map, dialog;
       require([
         "esri/map", "esri/dijit/HomeButton", "esri/dijit/LocateButton", "esri/dijit/BasemapToggle",
-         "esri/dijit/Search", "esri/geometry/Extent", "esri/layers/FeatureLayer",
+         "esri/dijit/Search", "esri/geometry/Extent", "esri/layers/FeatureLayer", "esri/layers/OpenStreetMapLayer",
         "esri/layers/RasterLayer", "esri/layers/ImageServiceParameters", "esri/layers/MosaicRule",
         "esri/layers/DimensionalDefinition",
         "dijit/form/VerticalSlider","dijit/form/VerticalRule",
@@ -14,11 +14,11 @@ var map, dialog;
         "dojo/dom-construct",
         "dojo/query",
         "dojo/_base/Color", "dojox/charting/Chart2D", "dojox/charting/plot2d/Pie",
-        "dojox/charting/themes/Desert", "dojo/domReady!"
+        "dojox/charting/themes/Desert", "dijit/form/Button", "dojo/domReady!"
 
       ], function(
         Map, HomeButton, LocateButton, BasemapToggle, Search, Extent, FeatureLayer,
-        RasterLayer, ImageServiceParameters, MosaicRule,
+        OpenStreetMapLayer, RasterLayer, ImageServiceParameters, MosaicRule,
         DimensionalDefinition,
         VerticalSlider, VerticalRule,
         SimpleFillSymbol, SimpleLineSymbol,
@@ -27,7 +27,7 @@ var map, dialog;
         TooltipDialog, dijitPopup, OverviewMap, 
         parser, SimpleMarkerSymbol, screenUtils, dom, domConstruct, query
       ) {
-        var queryTask, query;
+        var queryTask, query, openStreetMapLayer;
         parser.parse(); 
         
         map = new Map("mapDiv", {
@@ -46,6 +46,20 @@ var map, dialog;
           map: map
         }, "locateButtonDiv");
         geolocate.startup();
+
+        openStreetMapLayer = new OpenStreetMapLayer();
+        var isOsmLayerAdded = false;
+        var osmButton = document.getElementById("osmButton");
+        osmButton.onclick = function(){
+          if(!isOsmLayerAdded){
+            map.addLayer(openStreetMapLayer);
+            isOsmLayerAdded = true;
+          } else {
+            map.removeLayer(openStreetMapLayer);
+            isOsmLayerAdded = false;
+          }
+        };
+
 
         var rulesNode = document.getElementById("rulesNode");
 
