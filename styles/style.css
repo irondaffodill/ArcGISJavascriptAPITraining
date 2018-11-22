@@ -70,6 +70,15 @@ z-index: 50;
   
 }
 
+#pixelSlider{
+  height: 150px;
+  width: 30px;
+  position: absolute;
+  top: 150px;
+  right: 2px;
+  z-index: 30;
+}
+
 .btn {
     background-color: gray; /* Blue background */
     border: none; /* Remove borders */
@@ -133,15 +142,15 @@ left: 1em;
     width: 50%;
 }
 
-/*#verticalDiv{
+#verticalDiv{
   background: #fff;
   box-shadow: 0 0 5px #888;
   padding: 0.5em;
-  width: 20px;
+  width: 30px;
   height: 10px;
   position: absolute;
   right: 10px;
   top: 10em;
   z-index: 80;
   overflow: hidden;
-}*/
+}

@@ -1,33 +1,36 @@
 var map, dialog;
       require([
-        "esri/map", "esri/dijit/HomeButton", "esri/dijit/LocateButton", "esri/dijit/BasemapToggle",
+        "esri/map",   "esri/domUtils", "dojo/parser", "dojo/dom", "dojo/dom-construct",
+        "dojo/on", "dijit/registry", "esri/layers/RasterLayer", "dojox/form/RangeSlider",
+        "dijit/form/VerticalRule", "dijit/form/VerticalRuleLabels", 
+        "esri/dijit/HomeButton", "esri/dijit/LocateButton", "esri/dijit/BasemapToggle",
          "esri/dijit/Search", "esri/geometry/Extent", "esri/layers/FeatureLayer", "esri/layers/OpenStreetMapLayer",
-        "esri/layers/RasterLayer", "esri/layers/ImageServiceParameters", "esri/layers/MosaicRule",
-        "esri/layers/DimensionalDefinition",
-        "dijit/form/VerticalSlider","dijit/form/VerticalRule",
+         "esri/layers/ImageServiceParameters", "esri/layers/MosaicRule","esri/layers/RasterFunction", 
+        "esri/layers/DimensionalDefinition",  
         "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleLineSymbol", 
         "esri/renderers/SimpleRenderer", "esri/graphic", "esri/lang",
         "esri/Color", "dojo/number", "dojo/dom-style", 
         "dijit/TooltipDialog", "dijit/popup",  "esri/dijit/OverviewMap",
-        "dojo/parser", "esri/symbols/SimpleMarkerSymbol","esri/geometry/screenUtils",
-        "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dojo/dom",
-        "dojo/dom-construct",
+        "esri/symbols/SimpleMarkerSymbol","esri/geometry/screenUtils",
+        "dijit/layout/BorderContainer", "dijit/layout/ContentPane",         
         "dojo/query",
         "dojo/_base/Color", "dojox/charting/Chart2D", "dojox/charting/plot2d/Pie",
         "dojox/charting/themes/Desert", "dijit/form/Button", "dojo/domReady!"
 
       ], function(
-        Map, HomeButton, LocateButton, BasemapToggle, Search, Extent, FeatureLayer,
-        OpenStreetMapLayer, RasterLayer, ImageServiceParameters, MosaicRule,
-        DimensionalDefinition,
-        VerticalSlider, VerticalRule,
+        Map, domUtils, parser, dom, domConstruct, on, registry, RasterLayer,
+        RangeSlider,  VerticalRule, VerticalRuleLabels,
+        HomeButton, LocateButton, BasemapToggle, Search, Extent, FeatureLayer,
+        OpenStreetMapLayer, ImageServiceParameters, MosaicRule, RasterFunction,
+        DimensionalDefinition, 
         SimpleFillSymbol, SimpleLineSymbol,
         SimpleRenderer, Graphic, esriLang,
         Color, number, domStyle,
         TooltipDialog, dijitPopup, OverviewMap, 
-        parser, SimpleMarkerSymbol, screenUtils, dom, domConstruct, query
+        SimpleMarkerSymbol, screenUtils,  query
       ) {
-        var queryTask, query, openStreetMapLayer;
+        var queryTask, query, openStreetMapLayer ;
+
         parser.parse(); 
         
         map = new Map("mapDiv", {
@@ -60,23 +63,18 @@ var map, dialog;
           }
         };
 
+        var currentMin, currentMax;
 
-        var rulesNode = document.getElementById("rulesNode");
+        var slider = registry.byId("pixelSlider");
+        var sliderMin = 10;
+        var sliderMax = 37;
+        slider.minimum = sliderMin;
+        slider.maximum = sliderMax;
+        slider.value = [sliderMin, sliderMax];
 
-        // var sliderRules = new VerticalRule({
-        //     count: 11,
-        //     style: "width:5px;"
-        // }, rulesNode).startup();
-
-        // var slider = new VerticalSlider({
-        //     name: "verticalDiv",
-        //     value: [-3, 37],
-        //     minimum: -3,
-        //     maximum: 37,
-        //     intermediateChanges: true,
-        //     style: "height:300px;"
-        // }, "verticalDiv").startup();
-
+        slider.on("mouseup", setPixelFilter);
+        slider.on("change", setPixelFilter);
+        
         colorRamp = [];
         for(var i = 0; i < 256; i++){
           colorRamp.push([i, 30, 255-i]);
@@ -102,7 +100,6 @@ var map, dialog;
         var params = new ImageServiceParameters();
         params.mosaicRule = new MosaicRule(defaultMosaic);
 
-        var currentMin, currentMax;
         var rasterUrl = "https://sampleserver6.arcgisonline.com/arcgis/rest/services/ScientificData/SeaTemperature/ImageServer";
         var rasterLayer = new RasterLayer(rasterUrl, {
           opacity: 1,
@@ -158,9 +155,15 @@ var map, dialog;
         };
 
         function setPixelFilter(){
-          //var val = slider.get('value');
-          currentMin = 10;
-          currentMax = 37;
+          var val = slider.get("value");
+          currentMin = Math.floor(val[0]);
+          currentMax = Math.floor(val[1]);
+          if(val){
+
+          }
+          else {
+
+          }
           rasterLayer.redraw();
         };
 
